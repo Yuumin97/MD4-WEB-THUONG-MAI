@@ -1,4 +1,4 @@
-package threephone.group.model;
+package threephone.group.model.product;
 
 import javax.persistence.*;
 
