@@ -1,4 +1,6 @@
-package threephone.group.model;
+package threephone.group.model.product;
+
+import threephone.group.model.category.Category;
 
 import javax.persistence.*;
 
@@ -13,7 +15,6 @@ public class Product {
     private String description;
     private String manufacture;
     private String image;
-
     public Product() {
     }
 
