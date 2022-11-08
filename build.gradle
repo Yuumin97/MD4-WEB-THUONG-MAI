@@ -21,7 +21,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.10.Final'
-    // Security
+//     Security
 
 //    implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.4.2'
 //
@@ -34,6 +34,9 @@ dependencies {
     // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.0'
     testImplementation 'org.springframework.security:spring-security-test'
+    //Upload file
+    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+
 }
 
 tasks.named('test') {

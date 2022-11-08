@@ -44,15 +44,15 @@ public class ProductController {
         return new ResponseEntity<>(productService.findAll(pageable),HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> detailStudent(@PathVariable Long id){
+    @GetMapping("{id}")
+    public ResponseEntity<?> detailProduct(@PathVariable Long id){
         if (!productService.findById(id).isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(productService.findById(id).get(),HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<?> updateProduct(@PathVariable Long id ,@RequestBody Product product){
         Optional<Product> product1 = productService.findById(id);
         if (!product1.isPresent()){
@@ -73,7 +73,7 @@ public class ProductController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long id){
         Optional<Product> product = productService.findById(id);
         if(!product.isPresent()){
@@ -83,13 +83,7 @@ public class ProductController {
         return new ResponseEntity<>(new ResponseMessage("Delete success !"),HttpStatus.OK);
     }
 
-//    @GetMapping("/search/{name}")
-//    public ResponseEntity<?> searchByName(@PathVariable String name){
-//        if (name.trim().equals("")){
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//
-//    }
+
 
     @GetMapping("/searchs")
     public ResponseEntity<?> searchByNamePage(@RequestParam String name,Pageable pageable){

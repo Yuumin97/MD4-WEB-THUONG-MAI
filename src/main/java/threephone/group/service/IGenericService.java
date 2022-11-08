@@ -13,8 +13,8 @@ public interface IGenericService<T> {
     Optional<T> findById(Long id);
     T save (T t);
     void remote(Long id);
-
     List<T> findByName(String name);
     Boolean existsByName(String name);
-    Page<Product> findByNameContaining(String name, Pageable pageable);
+    Page<T> findByNameContaining(String name, Pageable pageable);
+
 }
