@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class ProductController {
     @Autowired
     private IProductService productService;
@@ -25,7 +25,7 @@ public class ProductController {
         Page<Product> products = productService.findAll(pageable);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity<?> createProduct(@RequestBody Product product){
         if (product.getName().trim().equals("") || product.getName().length() < 1 || product.getName().length() > 20) {
             return new ResponseEntity<>(new ResponseMessage("The name product invalid"), HttpStatus.OK);
