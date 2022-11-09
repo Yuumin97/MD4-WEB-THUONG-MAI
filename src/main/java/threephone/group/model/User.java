@@ -52,4 +52,9 @@ public class User {
         this.email = email;
         this.password = encode;
     }
+
+    public User(String username, String userEmail) {
+        this.name = username;
+        this.email = userEmail;
+    }
 }

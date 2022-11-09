@@ -25,9 +25,9 @@ public class ProductController {
         Page<Product> products = productService.findAll(pageable);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
-    @PostMapping("create")
+    @PostMapping("/create")
     public ResponseEntity<?> createProduct(@RequestBody Product product){
-        if (product.getName().trim().equals("") || product.getName().length() < 1 || product.getName().length() > 20) {
+        if (product.getName().trim().equals("")) {
             return new ResponseEntity<>(new ResponseMessage("The name product invalid"), HttpStatus.OK);
         }
         if (productService.existsByName(product.getName())) {
@@ -56,7 +56,7 @@ public class ProductController {
         if (!product1.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        if (product.getName().trim().equals("") || product.getName().length() < 1 || product.getName().length() > 10){
+        if (product.getName().trim().equals("")){
             return new ResponseEntity<>(new ResponseMessage("The name product invalid"),HttpStatus.OK);
         }
         if (productService.existsByName(product.getName())){

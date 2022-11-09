@@ -31,7 +31,7 @@ public class CategoryController {
     }
     @PostMapping
     public ResponseEntity createProduct(@RequestBody Category category){
-        if (category.getName().trim().equals("") || category.getName().length() < 1 || category.getName().length() > 20) {
+        if (category.getName().trim().equals("")) {
             return new ResponseEntity<>(new ResponseMessage("The name product invalid"), HttpStatus.OK);
         }
         if (categoryService.existsByName(category.getName())) {
@@ -51,7 +51,7 @@ public class CategoryController {
         if (!category1.isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        if (category.getName().trim().equals("") || category.getName().length() < 1 || category.getName().length() > 10){
+        if (category.getName().trim().equals("")){
             return new ResponseEntity<>(new ResponseMessage("The name category invalid"),HttpStatus.OK);
         }
         if (categoryService.existsByName(category.getName())){

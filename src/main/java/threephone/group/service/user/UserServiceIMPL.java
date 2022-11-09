@@ -22,12 +22,15 @@ public class UserServiceIMPL implements IUserService{
     }
 
     @Override
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {return userRepository.save(user);
     }
 
     @Override
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+    public Long isUserPresent(User user){
+        User user1 = userRepository.getUserByEmailAndName(user.getName(), user.getEmail());
+        return user1!=null ? user1.getId(): null ;
     }
 }
