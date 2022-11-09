@@ -29,9 +29,9 @@ dependencies {
 
 //     Security
 
-//    implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.4.2'
-//
-//    implementation group: 'org.springframework.security', name: 'spring-security-taglibs', version: '5.4.2'
+    implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.4.2'
+
+    implementation group: 'org.springframework.security', name: 'spring-security-taglibs', version: '5.4.2'
 
     // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
     implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.4.3'
