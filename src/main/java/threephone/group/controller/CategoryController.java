@@ -81,13 +81,11 @@ public class CategoryController {
     }
 
 
-    @GetMapping("/searchs")
+    @GetMapping("/search")
     public ResponseEntity<?> searchByNamePage(@RequestParam String name,Pageable pageable){
         if (name.trim().equals("")){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(categoryService.findByNameContaining(name,pageable),HttpStatus.OK);
     }
-
-
 }
