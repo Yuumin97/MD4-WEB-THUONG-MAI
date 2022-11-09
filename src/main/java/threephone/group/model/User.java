@@ -34,7 +34,7 @@ public class User {
     @Email
     private String email;
     @NotBlank
-    @Size(min = 5,  max = 30)
+    @Size(min = 6, max = 100)
     @JsonIgnore
     private String password;
     @Lob
@@ -43,12 +43,13 @@ public class User {
     @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
     Set<Role> roles = new HashSet<>();
 
-    public User(String name, String username, String email, String password, Set<Role> roles) {
+    public User(@NotBlank @Size(min = 3, max = 50)String name,
+                @NotBlank @Size(min = 3, max = 50)String username,
+                @NotBlank @Size(max = 50) @Email String email,
+                @NotBlank @Size(min = 6, max = 100)String encode) {
         this.name = name;
         this.username = username;
         this.email = email;
-        this.password = password;
-        this.roles = roles;
+        this.password = encode;
     }
-
 }

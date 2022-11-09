@@ -9,7 +9,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignInForm {
+public class SignUpForm {
     private String name;
     private String username;
     private String email;

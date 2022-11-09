@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
-import threephone.group.security.userprincipal.UserDetailServiceIMPL;
+import threephone.group.security.userprincipal.UserDetailService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -16,12 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtAutoTokenFilter extends OncePerRequestFilter {
+public class JwtAuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtProvider tokenProvider;
     @Autowired
-    private UserDetailServiceIMPL userDetailServiceIMPL;
-    private static final Logger logger = LoggerFactory.getLogger(JwtAutoTokenFilter.class);
+    private UserDetailService userDetailServiceIMPL;
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthTokenFilter.class);
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
@@ -39,7 +39,7 @@ public class JwtAutoTokenFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request,response);
     }
-    private String getJwt(HttpServletRequest request){
+    public String getJwt(HttpServletRequest request){
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer")){
             return authHeader.replace("Bearer","");
