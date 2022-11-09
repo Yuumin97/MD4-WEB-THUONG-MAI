@@ -7,19 +7,25 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import threephone.group.dto.response.CategoryResponse;
 import threephone.group.dto.response.ResponseMessage;
 import threephone.group.model.category.Category;
-
+import threephone.group.repository.ICategoryRepository;
+import threephone.group.repository.IProductRepository;
 import threephone.group.service.category.ICategoryService;
-
 import java.util.Optional;
 
 
 @RestController
 @RequestMapping("/api/categories")
+@CrossOrigin(origins = "*")
 public class CategoryController {
     @Autowired
     private ICategoryService categoryService;
+    @Autowired
+    private ICategoryRepository categoryRepository;
+    @Autowired
+    private IProductRepository productRepository;
     @GetMapping
     public ResponseEntity<?> showListCategory(Pageable pageable){
         Page<Category> categories = categoryService.findAll(pageable);
@@ -64,8 +70,6 @@ public class CategoryController {
             return new ResponseEntity<>(new ResponseMessage("The name category exited !"),HttpStatus.OK);
         }
         category1.get().setName(category.getName());
-        category1.get().setProducts(category.getProducts());
-
         return new ResponseEntity<>(new ResponseMessage("Update success !"),HttpStatus.OK);
 
     }
@@ -81,6 +85,16 @@ public class CategoryController {
     }
 
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> detail(@PathVariable("id") Long id){
+        CategoryResponse categoryResponse = new CategoryResponse();
+        Category category = categoryService.findById(id).get();
+        categoryResponse.setId(category.getId());
+        categoryResponse.setName(category.getName());
+        categoryResponse.setProducts(productRepository.findStudentIdCategory(id));
+
+        return new ResponseEntity<>(category,HttpStatus.OK);
+    }
     @GetMapping("/search")
     public ResponseEntity<?> searchByNamePage(@RequestParam String name,Pageable pageable){
         if (name.trim().equals("")){

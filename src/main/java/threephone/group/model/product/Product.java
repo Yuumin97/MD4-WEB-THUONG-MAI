@@ -15,6 +15,8 @@ public class Product {
     private String description;
     private String manufacture;
     private String image;
+    @ManyToOne
+    private Category category;
     public Product() {
     }
 
@@ -25,6 +27,24 @@ public class Product {
         this.description = description;
         this.manufacture = manufacture;
         this.image = image;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Product(Long id, String name, float price, String description, String manufacture, String image, Category category) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.manufacture = manufacture;
+        this.image = image;
+        this.category = category;
     }
 
     public Long getId() {

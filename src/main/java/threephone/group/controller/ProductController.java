@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import threephone.group.dto.response.ResponseMessage;
 import threephone.group.model.product.Product;
 import threephone.group.service.product.IProductService;
-
-import javax.swing.text.html.Option;
-import java.awt.image.ImageProducer;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
+@CrossOrigin(origins = "*")
 public class ProductController {
     @Autowired
     private IProductService productService;
@@ -82,20 +80,13 @@ public class ProductController {
         productService.remote(id);
         return new ResponseEntity<>(new ResponseMessage("Delete success !"),HttpStatus.OK);
     }
-
-
-
-    @GetMapping("/searchs")
+    @GetMapping("/search")
     public ResponseEntity<?> searchByNamePage(@RequestParam String name,Pageable pageable){
         if (name.trim().equals("")){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(productService.findByNameContaining(name,pageable),HttpStatus.OK);
     }
-
-
-
-
 }
 
 
