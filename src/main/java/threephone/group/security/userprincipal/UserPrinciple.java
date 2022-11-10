@@ -75,14 +75,6 @@ public class UserPrinciple implements UserDetails {
         this.password = password;
     }
 
-    public Collection<? extends GrantedAuthority> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<? extends GrantedAuthority> roles) {
-        this.roles = roles;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
