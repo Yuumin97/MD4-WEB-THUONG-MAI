@@ -29,6 +29,12 @@ public class UserServiceIMPL implements IUserService{
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
     public Long isUserPresent(User user){
         User user1 = userRepository.getUserByEmailAndName(user.getName(), user.getEmail());
         return user1!=null ? user1.getId(): null ;
