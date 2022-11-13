@@ -1,5 +1,4 @@
 package threephone.group.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/categories")
 @CrossOrigin
-public class CategoryController {
+public class  CategoryController {
     @Autowired
     private ICategoryService categoryService;
     @Autowired
@@ -59,7 +58,6 @@ public class CategoryController {
         }
         category1.get().setName(category.getName());
         return new ResponseEntity<>(new ResponseMessage("Update success !"),HttpStatus.OK);
-
     }
 
     @DeleteMapping("{id}")
@@ -72,7 +70,6 @@ public class CategoryController {
         return new ResponseEntity<>(new ResponseMessage("Delete success !"),HttpStatus.OK);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<?> detail(@PathVariable("id") Long id){
         CategoryResponse categoryResponse = new CategoryResponse();
@@ -82,6 +79,7 @@ public class CategoryController {
         categoryResponse.setProducts(productRepository.findStudentIdCategory(id));
         return new ResponseEntity<>(categoryResponse,HttpStatus.OK);
     }
+
     @GetMapping("/search")
     public ResponseEntity<?> searchByNamePage(@RequestParam String name,Pageable pageable){
         if (name.trim().equals("")){

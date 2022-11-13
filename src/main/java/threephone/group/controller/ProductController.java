@@ -1,7 +1,4 @@
 package threephone.group.controller;
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +22,7 @@ public class ProductController {
         Page<Product> products = productService.findAll(pageable);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+
     @PostMapping("/create")
     public ResponseEntity<?> createProduct(@RequestBody Product product){
         if (product.getName().trim().equals("")) {
@@ -68,7 +66,6 @@ public class ProductController {
         product1.get().setPrice(product.getPrice());
         productService.save(product1.get());
         return new ResponseEntity<>(new ResponseMessage("Update success !"),HttpStatus.OK);
-
     }
 
     @DeleteMapping("{id}")
