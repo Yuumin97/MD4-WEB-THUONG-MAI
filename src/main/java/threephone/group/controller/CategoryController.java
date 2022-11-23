@@ -12,6 +12,8 @@ import threephone.group.model.category.Category;
 import threephone.group.repository.ICategoryRepository;
 import threephone.group.repository.IProductRepository;
 import threephone.group.service.category.ICategoryService;
+
+import java.util.List;
 import java.util.Optional;
 @RestController
 @RequestMapping("/api/categories")
@@ -23,10 +25,15 @@ public class CategoryController {
     private ICategoryRepository categoryRepository;
     @Autowired
     private IProductRepository productRepository;
-    @GetMapping
+    @GetMapping("/pageCategory")
     public ResponseEntity<?> showListCategory(Pageable pageable){
         Page<Category> categories = categoryService.findAll(pageable);
         return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+    @GetMapping
+    public ResponseEntity<?> showListCategory(){
+        List<Category> categories = categoryService.findAll();
+        return new ResponseEntity<>(categories,HttpStatus.OK);
     }
     @PostMapping
     public ResponseEntity createProduct(@RequestBody Category category){
