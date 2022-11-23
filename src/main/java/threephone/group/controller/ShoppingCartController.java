@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import threephone.group.model.cart.Order;
+import threephone.group.model.cart.Orders;
 import threephone.group.repository.ShoppingCartRepository;
 import threephone.group.service.shoppingCart.ShoppingCartServiceIMPL;
 import threephone.group.service.user.UserServiceIMPL;
@@ -26,7 +26,7 @@ public class ShoppingCartController {
 
     @GetMapping(value = "/order/{orderId}")
     public ResponseEntity<?> getOrderDetail(@PathVariable Long orderId){
-        Order order = orderServiceIMPL.getOrderDetail(orderId);
+        Orders order = orderServiceIMPL.getOrderDetail(orderId);
         return ResponseEntity.ok(order);
     }
 //    @PostMapping("/placeOrder")

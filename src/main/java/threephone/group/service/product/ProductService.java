@@ -7,11 +7,14 @@ import org.springframework.stereotype.Service;
 import threephone.group.model.product.Product;
 import threephone.group.repository.IProductRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 
 @Service
+@Transactional
+
 public class ProductService implements IProductService{
     @Autowired
     IProductRepository productRepository;

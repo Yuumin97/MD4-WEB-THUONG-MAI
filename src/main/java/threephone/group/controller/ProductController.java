@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import threephone.group.dto.response.ResponseMessage;
+import threephone.group.model.category.Category;
 import threephone.group.model.product.Product;
+import threephone.group.service.category.CategoryServiceIMPL;
 import threephone.group.service.product.IProductService;
 import java.util.Optional;
 
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private IProductService productService;
+    @Autowired
+    private CategoryServiceIMPL categoryServiceIMPL;
     @GetMapping
     public ResponseEntity<?> showListProduct(Pageable pageable){
         Page<Product> products = productService.findAll(pageable);
@@ -25,22 +29,16 @@ public class ProductController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createProduct(@RequestBody Product product){
-        if (product.getName().trim().equals("")) {
-            return new ResponseEntity<>(new ResponseMessage("The name product invalid"), HttpStatus.OK);
-        }
-        if (productService.existsByName(product.getName())) {
-            return new ResponseEntity<>(new ResponseMessage("The name product exited"), HttpStatus.OK);
-        }
         productService.save(product);
         return new ResponseEntity<>(new ResponseMessage("Create success!"), HttpStatus.OK);
     }
 
     @GetMapping("/page")
-    public ResponseEntity<?> pageProduct(@PageableDefault(sort = "name", size = 5) Pageable pageable){
+    public ResponseEntity<?> pageProduct(@PageableDefault(sort = "name", size = 9) Pageable pageable){
         return new ResponseEntity<>(productService.findAll(pageable),HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> detailProduct(@PathVariable Long id){
         if (!productService.findById(id).isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

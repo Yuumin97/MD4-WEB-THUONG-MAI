@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/categories")
 @CrossOrigin
-public class  CategoryController {
+public class CategoryController {
     @Autowired
     private ICategoryService categoryService;
     @Autowired
@@ -71,7 +71,7 @@ public class  CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> detail(@PathVariable("id") Long id){
+    public ResponseEntity<?> detail(@PathVariable Long id){
         CategoryResponse categoryResponse = new CategoryResponse();
         Category category = categoryService.findById(id).get();
         categoryResponse.setId(category.getId());

@@ -5,9 +5,12 @@ import org.springframework.stereotype.Service;
 import threephone.group.model.User;
 import threephone.group.repository.IUserRepository;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
+
 public class UserServiceIMPL implements IUserService{
     @Autowired
     private IUserRepository userRepository;

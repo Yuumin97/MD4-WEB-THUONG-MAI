@@ -1,6 +1,5 @@
 package threephone.group.controller;
 
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import threephone.group.dto.response.ResponseMessage;
 import threephone.group.dto.shoppingCart.OrderResponseDTO;
 import threephone.group.model.User;
-import threephone.group.model.cart.Order;
+import threephone.group.model.cart.Orders;
 import threephone.group.model.product.Product;
 import threephone.group.security.userprincipal.UserDetailService;
 import threephone.group.service.order.OrderServiceIMPL;
@@ -32,14 +31,18 @@ public class OrderController {
         return new ResponseEntity<>(orderServiceIMPL.findAll(), HttpStatus.OK);
     }
     @PostMapping("/addItems")
-    public ResponseEntity<?> createOrder(@RequestBody Order order){
+    public ResponseEntity<?> createOrder(@RequestBody Orders order){
+        User user = userDetailService.getCurrentUser();
+        if(user.getUsername().equals("Anonymous")){
+            return new ResponseEntity<>(new ResponseMessage("Not_Found"), HttpStatus.OK);
+        }
         orderServiceIMPL.save(order);
         return new ResponseEntity<>(new ResponseMessage("create_success"), HttpStatus.OK);
     }
     @GetMapping("/shoppingCart")
     public ResponseEntity<?> findOrderByUser(){
         User user = userDetailService.getCurrentUser();
-        List<Order> orderList = orderServiceIMPL.findByUser(user);
+        List<Orders> orderList = orderServiceIMPL.findByUser(user);
         List<Long> products = new ArrayList<>();
         for (int i = 0; i < orderList.size(); i++) {
             products.add(orderList.get(i).getProducts().get(0).getId());

@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 import threephone.group.model.category.Category;
 import threephone.group.repository.ICategoryRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CategoryServiceIMPL implements ICategoryService{
     @Autowired
     ICategoryRepository categoryRepository;

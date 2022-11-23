@@ -1,15 +1,15 @@
 package threephone.group.service.order;
 
 import threephone.group.model.User;
-import threephone.group.model.cart.Order;
+import threephone.group.model.cart.Orders;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IOderService {
-    List<Order> findAll();
-    void save(Order order);
+    List<Orders> findAll();
+    void save(Orders order);
     void deleteById(Long id);
-    Optional<Order> findById(Long id);
-    List<Order> findByUser(User user);
+    Optional<Orders> findById(Long id);
+    List<Orders> findByUser(User user);
 }

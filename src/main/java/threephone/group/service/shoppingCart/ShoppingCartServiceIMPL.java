@@ -2,13 +2,16 @@ package threephone.group.service.shoppingCart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import threephone.group.model.cart.Order;
+import threephone.group.model.cart.Orders;
 import threephone.group.repository.IProductRepository;
 import threephone.group.repository.OrderRepository;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
+
 public class ShoppingCartServiceIMPL {
     @Autowired
     private OrderRepository orderRepository;
@@ -19,8 +22,8 @@ public class ShoppingCartServiceIMPL {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
     }
-    public Order getOrderDetail(Long id){
-        Optional<Order> order = this.orderRepository.findById(id);
+    public Orders getOrderDetail(Long id){
+        Optional<Orders> order = this.orderRepository.findById(id);
         return order.isPresent() ? order.get() : null;
     }
 //    public int getCartAmount(List<ShoppingCart> shoppingCarts) {
@@ -49,7 +52,7 @@ public class ShoppingCartServiceIMPL {
 //        }
 //        return (int) totalCartAmount;
 //    }
-    public Order save(Order order){
+    public Orders save(Orders order){
         return orderRepository.save(order);
     }
 }

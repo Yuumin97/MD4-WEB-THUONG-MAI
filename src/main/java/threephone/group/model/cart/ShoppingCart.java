@@ -21,7 +21,7 @@ public class ShoppingCart {
     private Long id;
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Product.class)
     @JoinColumn(name = "oder_id",referencedColumnName = "id")
-    private List<Order> orderList;
+    private List<Orders> orderList;
     @ManyToOne
     private User user;
 }
