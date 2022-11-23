@@ -57,6 +57,7 @@ public class CategoryController {
             return new ResponseEntity<>(new ResponseMessage("The name category exited !"),HttpStatus.OK);
         }
         category1.get().setName(category.getName());
+        category1.get().setAvatar(category.getAvatar());
         return new ResponseEntity<>(new ResponseMessage("Update success !"),HttpStatus.OK);
     }
 
