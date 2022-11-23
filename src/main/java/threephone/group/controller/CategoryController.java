@@ -65,6 +65,7 @@ public class CategoryController {
         }
         category1.get().setName(category.getName());
         category1.get().setAvatar(category.getAvatar());
+        categoryService.save(category1.get());
         return new ResponseEntity<>(new ResponseMessage("Update success !"),HttpStatus.OK);
     }
 
@@ -84,6 +85,7 @@ public class CategoryController {
         Category category = categoryService.findById(id).get();
         categoryResponse.setId(category.getId());
         categoryResponse.setName(category.getName());
+        categoryResponse.setAvatar(category.getAvatar());
         categoryResponse.setProducts(productRepository.findStudentIdCategory(id));
         return new ResponseEntity<>(categoryResponse,HttpStatus.OK);
     }
