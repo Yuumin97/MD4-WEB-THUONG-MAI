@@ -11,6 +11,9 @@ import threephone.group.model.category.Category;
 import threephone.group.model.product.Product;
 import threephone.group.service.category.CategoryServiceIMPL;
 import threephone.group.service.product.IProductService;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -81,6 +84,22 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(productService.findByNameContaining(name,pageable),HttpStatus.OK);
+    }
+    @GetMapping("/theme")
+    public ResponseEntity<?> themeById(){
+        List<Product> product = productService.findAll();
+        List<Product> products = new ArrayList<>();
+        int count = 0;
+        for (int i = 0; i < product.size() ; i++) {
+            if (product.get(i).getQuantity()> 100 ){
+                count ++;
+                products.add(product.get(i));
+                if (count == 10){
+                    break;
+                }
+            }
+        }
+        return new ResponseEntity<>(products,HttpStatus.OK);
     }
 }
 

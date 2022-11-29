@@ -24,8 +24,10 @@ public class Product {
 
     private int quantity;
     private String image;
+    private String advertising;
     @ManyToOne
     private Category category;
+
 
     @Override
     public String toString() {
@@ -36,7 +38,9 @@ public class Product {
                 ", description='" + description + '\'' +
                 ", manufacture='" + manufacture + '\'' +
                 ", availableQuantity=" + availableQuantity +
+                ", quantity=" + quantity +
                 ", image='" + image + '\'' +
+                ", advertising='" + advertising + '\'' +
                 ", category=" + category +
                 '}';
     }
